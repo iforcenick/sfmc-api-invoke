@@ -1,0 +1,8 @@
+{
+    "name": "A demo Node.js web app that calls Marketing Cloud REST APIs",
+    "description": "A demo Node.js web app calls Marketing Cloud REST APIs",
+    "repository": "https://github.com/sanagama/sfmc-restapi-nodejs",
+    "logo": "https://github.com/sanagama/sfmc-restapi-nodejs/static/images/sfmc.jpg",
+    "keywords": ["Salesforce", "Marketing Cloud"],
+    "image": "heroku/nodejs"
+}

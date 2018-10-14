@@ -1,0 +1,51 @@
+{
+  "name": "sfmc-restapi-nodejs",
+  "version": "1.0.0",
+  "description": "A demo Node.js web app that calls Marketing Cloud REST APIs",
+  "main": "dist/server.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "build": "tsc",
+    "postinstall": "npm run-script build"
+  },
+  "engines": {
+    "node": "^9.3.0",
+    "npm": "^5.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanagama/sfmc-restapi-nodejs.git"
+  },
+  "keywords": [
+    "Salesforce",
+    "Marketing Cloud"
+  ],
+  "author": "Sanjay Nagamangalam",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sanagama/sfmc-restapi-nodejs/issues"
+  },
+  "homepage": "https://github.com/sanagama/sfmc-restapi-nodejs#readme",
+  "devDependencies": {
+    "@types/compression": "0.0.36",
+    "@types/errorhandler": "0.0.32",
+    "@types/express": "^4.16.0",
+    "@types/express-session": "^1.15.10",
+    "@types/morgan": "^1.7.35",
+    "@types/node": "^10.9.4",
+    "typescript": "^3.0.3"
+  },
+  "dependencies": {
+    "@types/shortid": "0.0.29",
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "cookie-parser": "^1.4.3",
+    "errorhandler": "^1.5.0",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "morgan": "^1.9.0",
+    "shortid": "^2.2.13",
+    "winston": "^3.1.0"
+  }
+}
