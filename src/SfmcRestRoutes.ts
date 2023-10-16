@@ -27,6 +27,19 @@ export default class SfmcRestRoutes
         .get((req: express.Request, res: express.Response) => {            
             self.getContactCount(req, res);
         });
+
+
+        // create a push message
+        app.route('/newpush')
+        .get((req: express.Request, res: express.Response) => {            
+            self.createNewPush(req, res);
+        });
+
+        // send a push message
+        app.route('/sendpush')
+        .get((req: express.Request, res: express.Response) => {            
+            self.sendPush(req, res);
+        });
     }
 
     /**
@@ -90,6 +103,54 @@ export default class SfmcRestRoutes
         .catch(() => {
             // error
             res.status(500).send("ERROR getting Contact count - check console logs");
+        });
+    }
+
+
+
+    /**
+     * GET handler for /newpush
+     * Calls Marketing Cloud REST APIs to create a new push message
+     * 
+     */
+    public createNewPush(req: express.Request, res: express.Response)
+    {
+        let sessionId = req.session.id;
+        Utils.logInfo("/newpush route entered. SessionId = " + sessionId);
+
+        const { title, subtitle, alert } = req.body;
+
+        SfmcApi.createPush(title, subtitle, alert)
+        .then((msg) => {
+            // success
+            res.status(200).json({messageId: msg.id})
+        })
+        .catch(() => {
+            // error
+            res.status(500).send("ERROR creating new Contact - check console logs");
+        });
+    }
+
+    /**
+     * GET handler for /newpush
+     * Calls Marketing Cloud REST APIs to create a new push message
+     * 
+     */
+    public sendPush(req: express.Request, res: express.Response)
+    {
+        let sessionId = req.session.id;
+        Utils.logInfo("/sendpush route entered. SessionId = " + sessionId);
+
+        const { messageId } = req.body;
+
+        SfmcApi.sendPush(messageId)
+        .then(() => {
+            // success
+            res.status(200).send("Successfully sent push message to devices");
+        })
+        .catch(() => {
+            // error
+            res.status(500).send("ERROR sending push message - check console logs");
         });
     }
 }

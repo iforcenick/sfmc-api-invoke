@@ -13,6 +13,8 @@ class SfmcApiSingleton
     // Instance variables
     private _clientId = process.env.SFMC_API_CLIENTID;
     private _clientSecret = process.env.SFMC_API_CLIENTSECRET;
+    private _appId = process.env.SFMC_APP_ID;
+    private _appName = process.env.SFMC_APP_NAME;
     private _sfmcOauth: SfmcOauth;
     private _sfmcRestApiHelper: RestApiHelper;
 
@@ -161,6 +163,100 @@ class SfmcApiSingleton
            })
        });
    }    
+
+
+   /*
+    * createPush: creates a new push message in Marketing Cloud
+    * See: https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/createPushMessage.html
+    *
+    */
+    public createPush(title: string, subtitle: string, alert: string, messageType?: number, contentType?: number, name?: string, application?: any) : Promise<any>
+    {
+        let self = this;
+
+        // set defaults if missing
+        if(!messageType) {
+            messageType = 1;
+        } 
+        if(!contentType) {
+            contentType = 1;
+        }
+        if(!name) {
+            name = 'mobile capture app-' + shortid.generate();
+        }
+        if(!application) {
+            application = [{
+                id: this._appId,
+                name: this._appName,
+            }]
+        }
+
+        // POST body
+        let postBody = {
+            messageType,
+            contentType,
+            name,
+            application,
+            title,
+            subtitle,
+            alert
+        };
+        
+        // Make the async call
+        return new Promise<boolean>((resolve, reject) =>
+        {
+            self._sfmcOauth.getOAuthAccessToken()
+            .then((oauthAccessToken) => {
+                Utils.logInfo("Creating new push: " + title);
+
+                // Make REST API call
+                self._sfmcRestApiHelper.doPost(Constants.SfmcApiCreatePushMessageUrl, postBody, oauthAccessToken)
+                .then((res) => {
+                    // success
+                    Utils.logInfo("Successfully created a push message");
+                    resolve(res.data);
+                })
+                .catch((error: any) => {
+                    // error
+                    reject(error);
+                });
+            })
+        });
+    }
+
+    /*
+    * sendPush: send a push message in Marketing Cloud
+    * See: https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/createPushMessage.html
+    *
+    */
+    public sendPush(messageId: string) : Promise<boolean>
+    {
+        let self = this;
+
+        // POST body
+        let postBody = {};
+        
+        // Make the async call
+        return new Promise<boolean>((resolve, reject) =>
+        {
+            self._sfmcOauth.getOAuthAccessToken()
+            .then((oauthAccessToken) => {
+                Utils.logInfo("Sending push message: " + messageId);
+
+                // Make REST API call
+                self._sfmcRestApiHelper.doPost(Constants.SfmcApiSendPushMessageUrl.replace('{messageId}', messageId), postBody, oauthAccessToken)
+                .then((res) => {
+                    // success
+                    Utils.logInfo("Successfully sent a push message");
+                    resolve(res.data);
+                })
+                .catch((error: any) => {
+                    // error
+                    reject(error);
+                });
+            })
+        });
+    }
 }
 
 /** Instantiate singleton */
