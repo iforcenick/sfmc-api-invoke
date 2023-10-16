@@ -226,7 +226,7 @@ class SfmcApiSingleton
 
     /*
     * sendPush: send a push message in Marketing Cloud
-    * See: https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/createPushMessage.html
+    * See: https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/postMessageAppSend.html
     *
     */
     public sendPush(messageId: string) : Promise<boolean>
