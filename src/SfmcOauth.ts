@@ -78,17 +78,18 @@ export default class SfmcOauth
             Utils.logInfo("getNewOAuthAccessToken called.");
 
             let postBody = {
-                'clientId': self._clientId,
-                'clientSecret': self._clientSecret
+                'grant_type': 'client_credentials',
+                'client_id': self._clientId,
+                'client_secret': self._clientSecret
             };
 
             // POST to Marketing Cloud REST Auth service and get back an OAuth access token.
             self._restApiHelper.doPost(Constants.SfmcApiAuthServiceUrl, postBody)
             .then((response: any) => {
                 // success
-                let accessToken = response.data.accessToken;
+                let accessToken = response.data.access_token;
                 let tokenExpiry = new Date();
-                tokenExpiry.setSeconds(tokenExpiry.getSeconds() + response.data.expiresIn);
+                tokenExpiry.setSeconds(tokenExpiry.getSeconds() + response.data.expires_in);
 
                 resolve(
                 {

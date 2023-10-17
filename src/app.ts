@@ -4,7 +4,6 @@
  */
 
 import * as express from "express";
-import * as errorHandler from "errorhandler";
 import * as compression from "compression";  // compresses requests
 import * as bodyParser from "body-parser";
 import * as logger from "morgan";
@@ -26,9 +25,6 @@ class App {
 
   private config(): void
   {
-    // Error Handler. Provides full stack - remove for production
-    this.app.use(errorHandler());
-
     this.app.use(compression());
     this.app.use(logger("dev"));
     

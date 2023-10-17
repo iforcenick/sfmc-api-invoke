@@ -8,10 +8,6 @@
     "build": "tsc",
     "postinstall": "npm run-script build"
   },
-  "engines": {
-    "node": "^9.3.0",
-    "npm": "^5.6.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sanagama/sfmc-restapi-nodejs.git"
@@ -27,25 +23,25 @@
   },
   "homepage": "https://github.com/sanagama/sfmc-restapi-nodejs#readme",
   "devDependencies": {
-    "@types/compression": "0.0.36",
-    "@types/errorhandler": "0.0.32",
-    "@types/express": "^4.16.0",
-    "@types/express-session": "^1.15.10",
-    "@types/morgan": "^1.7.35",
-    "@types/node": "^10.9.4",
-    "typescript": "^3.0.3"
+    "@types/compression": "^1.7.3",
+    "@types/errorhandler": "^1.5.1",
+    "@types/express": "^4.17.19",
+    "@types/express-session": "^1.17.8",
+    "@types/morgan": "^1.9.6",
+    "@types/node": "^20.8.6",
+    "typescript": "^5.2.2"
   },
   "dependencies": {
     "@types/shortid": "0.0.29",
-    "axios": "^0.18.0",
-    "body-parser": "^1.18.3",
-    "compression": "^1.7.3",
-    "cookie-parser": "^1.4.3",
-    "errorhandler": "^1.5.0",
-    "express": "^4.16.2",
-    "express-session": "^1.15.6",
-    "morgan": "^1.9.0",
-    "shortid": "^2.2.13",
-    "winston": "^3.1.0"
+    "axios": "^1.5.1",
+    "body-parser": "^1.20.2",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "morgan": "^1.10.0",
+    "shortid": "^2.2.16",
+    "winston": "^3.11.0"
   }
 }
